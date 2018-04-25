@@ -3,13 +3,16 @@
 [![Build status](https://ci.appveyor.com/api/projects/status/27k3kat6xyhgq3tc?svg=true)](https://ci.appveyor.com/project/TheoConfidor/litemediator-dotnet)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
 
-The purpose of this project is to provide a very simple, no-fluff, single source file .NET Mediator implementation. 
+Mediator pattern is a very useful way to build your API in a modular, decomposed way, and then aggregate your functionality into one common application interface. The senders and receivers of messages do not know about each other, instead they depend upon the message itself. 
+It is one of the best ways of building [horizontally-organized systems](http://silasreinagel.com/2016/09/26/build-horizontally-not-vertically/).
 
-This project is designed to offer maximum value with minimal setup/configuration/learning. It is unintrusive and avoid the complexity and lack of clarity provided by other .NET Mediator implementations. 
+The purpose of this project is to provide a very simple, no-fluff, single source file .NET Mediator implementation. This project is designed to offer maximum value with minimal setup/configuration/learning. It is unintrusive and avoids the complexity and lack of clarity provided by other .NET Mediator implementations such as [MediatR](https://github.com/jbogard/MediatR) and [Mediator.Net](https://github.com/mayuanyang/Mediator.Net).
+
+----
 
 ## Usage
 
-#### Add to Project
+### Add to Project
 
 This library contains a single source file with two variants: `AsyncMediator.cs` and `SyncMediator.cs`
 
@@ -18,17 +21,53 @@ Use `SyncMediator.cs` in all other projects.
 
 Copy-paste the selected file directly into your project. 
 
-#### Request / Response
+### Request / Response
 
-// TODO
+**Async Mediator**
+```
+var mediator = new AsyncMediator();
 
-#### Messaging
+mediator.Register<CreateUserRequest, UserCreatedResponse>(
+    async req => await _datasource.InsertUserAsync(req));
 
-// TODO
+var response = await mediator.GetResponse<CreateUserRequest, UserCreatedResponse>(
+    new CreateUserRequest(...));
+```
 
-## Credits
+**Sync Mediator**
+```
+var mediator = new SyncMediator();
 
-Silas Reinagel
+mediator.Register<CreateUserRequest, UserCreatedResponse>(
+   req => _datasource.InsertUser(req));
+
+var response = mediator.GetResponse<CreateUserRequest, UserCreatedResponse>(
+    new CreateUserRequest(...));
+```
+
+### Messaging
+
+**Async Mediator**
+```
+var mediator = new AsyncMediator();
+
+mediator.Register<NewProductAdded>(
+    async msg => await _catalog.Update(msg));
+
+await mediator.Publish(new NewProductAdded(...));
+```
+
+**Sync Mediator**
+```
+var mediator = new SyncMediator();
+
+mediator.Register<NewProductAdded>(
+    msg => _catalog.Update(msg));
+
+mediator.Publish(new NewProductAdded(...));
+```
+
+----
 
 ## License
 
