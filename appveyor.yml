@@ -1,4 +1,6 @@
-version: 1.0.{build}
-image: Visual Studio 2017
-build_script:
-- cmd: "dotnet --info\ndotnet restore \ndotnet build --configuration Release\ndotnet test LiteMediator.Tests"
+dotnet --info
+dotnet restore 
+dotnet build --configuration Release
+dotnet test LiteMediator.Tests
+dotnet pack LiteMediator/LiteMediator.csproj /p:Version=1.0.%APPVEYOR_BUILD_VERSION% -c Release
+dotnet nuget push LiteMediator\bin\Release\LiteMediator.1.0.%APPVEYOR_BUILD_VERSION%.nupkg -s https://www.nuget.org/api/v2/package -k %NUGET_API_SECRET%
