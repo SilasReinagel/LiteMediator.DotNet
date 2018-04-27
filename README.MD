@@ -1,6 +1,7 @@
 # LiteMediator
 
 [![Build status](https://ci.appveyor.com/api/projects/status/27k3kat6xyhgq3tc?svg=true)](https://ci.appveyor.com/project/TheoConfidor/litemediator-dotnet)
+[![Nuget](https://img.shields.io/nuget/vpre/litemediator.svg)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
 
 Mediator pattern is a very useful way to build your API in a modular, decomposed way, and then aggregate your functionality into one common application interface. The senders and receivers of messages do not know about each other, instead they depend upon the message itself. 
@@ -20,6 +21,9 @@ Use `AsyncMediator.cs` in projects that are primary asynchonrous and use a lot o
 Use `SyncMediator.cs` in all other projects.
 
 Copy-paste the selected file directly into your project. 
+
+If you are required to use NuGet for a company project, this library is also available on Nuget.org. 
+`Install-Package LiteMediator`
 
 ### Request / Response
 
