@@ -1,7 +1,7 @@
 # LiteMediator
 
 [![Build status](https://ci.appveyor.com/api/projects/status/27k3kat6xyhgq3tc?svg=true)](https://ci.appveyor.com/project/TheoConfidor/litemediator-dotnet)
-[![Nuget](https://img.shields.io/nuget/vpre/litemediator.svg)(https://www.nuget.org/packages/LiteMediator/)
+[![Nuget](https://img.shields.io/nuget/vpre/litemediator.svg)](https://www.nuget.org/packages/LiteMediator/)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
 
 Mediator pattern is a very useful way to build your API in a modular, decomposed way, and then aggregate your functionality into one common application interface. The senders and receivers of messages do not know about each other, instead they depend upon the message itself. 
