@@ -1,4 +1,4 @@
 version: 1.0.{build}
 image: Visual Studio 2017
 build_script:
-- cmd: "dotnet --info\ndotnet restore \ndotnet build --configuration Release\ndotnet test LiteMediator.Tests\ndotnet pack LiteMediator/LiteMediator.csproj /p:Version=%APPVEYOR_BUILD_VERSION% -c Release
+- cmd: "dotnet --info\ndotnet restore \ndotnet build --configuration Release\ndotnet test LiteMediator.Tests\ndotnet pack LiteMediator/LiteMediator.csproj /p:Version=%APPVEYOR_BUILD_VERSION% -c Release"
