@@ -5,10 +5,10 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/64ee1c95fab14cb5b0ec8bb45f3793e6)](https://www.codacy.com/app/SilasReinagel/LiteMediator.DotNet?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=SilasReinagel/LiteMediator.DotNet&amp;utm_campaign=Badge_Grade)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
 
+![LiteMediator Logo](https://raw.githubusercontent.com/SilasReinagel/LiteMediator.DotNet/master/LiteMediator.jpg)
+
 Mediator pattern is a very useful way to build your API in a modular, decomposed way, and then aggregate your functionality into one common application interface. The senders and receivers of messages do not know about each other, instead they depend upon the message itself. 
 It is one of the best ways of building [horizontally-organized systems](http://silasreinagel.com/2016/09/26/build-horizontally-not-vertically/).
-
-![LiteMediator Logo][https://raw.githubusercontent.com/SilasReinagel/LiteMediator.DotNet/master/LiteMediator.jpg]
 
 The purpose of this project is to provide a very simple, no-fluff, single source file .NET Mediator implementation. This project is designed to offer maximum value with minimal setup/configuration/learning. It is unintrusive and avoids the complexity and lack of clarity provided by other .NET Mediator implementations such as [MediatR](https://github.com/jbogard/MediatR) and [Mediator.Net](https://github.com/mayuanyang/Mediator.Net).
 
