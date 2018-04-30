@@ -14,7 +14,7 @@ namespace LiteMediator
             var type = typeof(TMessage);
             if (_messageHandlers.ContainsKey(type))
                 foreach (var handler in _messageHandlers[type])
-                    await handler(message);
+                    await handler(message).ConfigureAwait(false);
         }
 
         public async Task<TResponse> GetResponse<TRequest, TResponse>(TRequest request)
@@ -22,7 +22,7 @@ namespace LiteMediator
             var type = typeof(TRequest);
             if (!_requestHandlers.ContainsKey(type))
                 throw new KeyNotFoundException($"Missing required registered handler for type {type.FullName}");
-            return (TResponse)await _requestHandlers[type](request);
+            return (TResponse)await _requestHandlers[type](request).ConfigureAwait(false);
         }
 
         public void Register<TMessage>(Action<TMessage> onMessage)
@@ -39,7 +39,7 @@ namespace LiteMediator
             var type = typeof(TMessage);
             if (!_messageHandlers.ContainsKey(type))
                 _messageHandlers[type] = new List<Func<object, Task>>();
-            _messageHandlers[type].Add(async x => await onMessage((TMessage)x));
+            _messageHandlers[type].Add(async x => await onMessage((TMessage)x).ConfigureAwait(false));
         }
 
         public void Register<TRequest, TResponse>(Func<TRequest, TResponse> getResponse)
@@ -52,7 +52,7 @@ namespace LiteMediator
             var type = typeof(TRequest);
             if (_requestHandlers.ContainsKey(type))
                 throw new InvalidOperationException($"Only one handler for type {type.FullName} may be registered.");
-            _requestHandlers[type] = (async x => await getResponse((TRequest)x));
+            _requestHandlers[type] = (async x => await getResponse((TRequest)x).ConfigureAwait(false));
         }
     }
 }
