@@ -12,19 +12,14 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
-- task: NuGetToolInstaller@0
+- script: |
+    dotnet build --configuration $(buildConfiguration)
+    dotnet test LiteMediator.Tests --configuration $(buildConfiguration) --logger trx
+    dotnet publish --configuration $(buildConfiguration) --output $BUILD_ARTIFACTSTAGINGDIRECTORY
 
-- task: NuGetCommand@2
+- task: PublishTestResults@2
   inputs:
-    restoreSolution: '$(solution)'
+    testRunner: VSTest
+    testResultsFiles: '**/*.trx'
 
-- task: VSBuild@1
-  inputs:
-    solution: '$(solution)'
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
-
-- task: VSTest@2
-  inputs:
-    platform: '$(buildPlatform)'
-    configuration: '$(buildConfiguration)'
+- task: PublishBuildArtifacts@1
